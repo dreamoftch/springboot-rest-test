@@ -1,8 +1,8 @@
 package com.tch.test.springboot.service.impl
 
-import com.tch.test.springboot.mapper.StudentMapper
-import com.tch.test.springboot.model.Student
-import com.tch.test.springboot.model.StudentExample
+import com.tch.test.springboot.mapper.one.StudentMapper
+import com.tch.test.springboot.model.one.Student
+import com.tch.test.springboot.model.one.StudentExample
 import com.tch.test.springboot.service.StudentService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -34,7 +34,7 @@ open class StudentServiceImpl: StudentService {
         val flag = true
         studentMapper.insert(student)
         if (flag) {
-            throw RuntimeException("异常。。。")
+            throw RuntimeException("student操作异常。。。")
         }
         studentMapper.insert(student)
     }
