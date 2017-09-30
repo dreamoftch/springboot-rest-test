@@ -16,30 +16,30 @@ import javax.sql.DataSource
  * Created by higgs on 2017/9/29.
  */
 @Configuration
-@MapperScan(value = "com.tch.test.springboot.mapper.two", sqlSessionFactoryRef = Test2DatasourceConfig.FACTORY_NAME)
-open class Test2DatasourceConfig {
+@MapperScan(value = "com.tch.test.springboot.mapper.three", sqlSessionFactoryRef = Test3DatasourceConfig.FACTORY_NAME)
+open class Test3DatasourceConfig {
 
     companion object {
-        const val FACTORY_NAME = "test2SqlSessionFactory"
-        const val TRANSACTION_MANAGER = "test2TxManager"
-        val MAPPER_LOCATION = "classpath:mbg/com/tch/test/springboot/mapper/two/*.xml"
+        const val FACTORY_NAME = "test3SqlSessionFactory"
+        const val TRANSACTION_MANAGER = "test3TxManager"
+        val MAPPER_LOCATION = "classpath:mbg/com/tch/test/springboot/mapper/three/*.xml"
     }
 
-    @Bean(name = arrayOf("test2DataSource"))
-    @ConfigurationProperties(prefix = "spring.datasource.druid.two")
-    open fun test2DataSource(): DataSource {
+    @Bean(name = arrayOf("test3DataSource"))
+    @ConfigurationProperties(prefix = "spring.datasource.druid.three")
+    open fun test3DataSource(): DataSource {
         return DruidDataSourceBuilder
                 .create()
                 .build()
     }
 
     @Bean(name = arrayOf(TRANSACTION_MANAGER))
-    open fun test2TxManager(): PlatformTransactionManager {
-        return DataSourceTransactionManager(test2DataSource())
+    open fun test3TxManager(): PlatformTransactionManager {
+        return DataSourceTransactionManager(test3DataSource())
     }
 
-    @Bean(name = arrayOf(Test2DatasourceConfig.FACTORY_NAME))
-    open fun test2SqlSessionFactory(): SqlSessionFactory {
+    @Bean(name = arrayOf(Test3DatasourceConfig.FACTORY_NAME))
+    open fun test3SqlSessionFactory(): SqlSessionFactory {
 //        方式一:不指定mapperLocations,这时候需要mapper xml的路径和mapper接口的package路径一致,否则不能绑定xml和mapper接口
 //        val sessionFactory = SqlSessionFactoryBean()
 //        sessionFactory.setDataSource(test2DataSource())
@@ -47,7 +47,7 @@ open class Test2DatasourceConfig {
 
 //        方式二:指定mapperLocations,xml和mapper接口的路径不需要一致,更加灵活
         val sessionFactory = SqlSessionFactoryBean()
-        sessionFactory.setDataSource(test2DataSource())
+        sessionFactory.setDataSource(test3DataSource())
         sessionFactory.setMapperLocations(PathMatchingResourcePatternResolver()
                 .getResources(MAPPER_LOCATION))
         return sessionFactory.`object`

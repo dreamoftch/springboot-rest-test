@@ -7,7 +7,7 @@
 
     <context id="mysqlTables" targetRuntime="MyBatis3">
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3307/test2?useUnicode=true&amp;characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://localhost:3307/test3?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="root">
         </jdbcConnection>
@@ -16,20 +16,24 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.tch.test.springboot.model.two" targetProject="src/main/java">
+        <!--生成table对应的model类-->
+        <javaModelGenerator targetPackage="com.tch.test.springboot.model.three" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.tch.test.springboot.mapper.two" targetProject="src/main/resources">
+        <!--生成table对应的mapper xml-->
+        <sqlMapGenerator targetPackage="com.tch.test.springboot.mapper.three" targetProject="src/main/resources/mbg">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.tch.test.springboot.mapper.two" targetProject="src/main/java">
+        <!--生成table对应的mapper接口类-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.tch.test.springboot.mapper.three" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="teacher" domainObjectName="Teacher">
+        <!--指定要生成的表-->
+        <table tableName="organization" domainObjectName="Organization">
             <generatedKey column="id" sqlStatement="mysql" identity="true"/>
         </table>
 

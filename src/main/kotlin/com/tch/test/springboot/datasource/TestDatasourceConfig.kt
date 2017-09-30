@@ -23,7 +23,7 @@ open class TestDatasourceConfig {
 
     companion object {
         const val FACTORY_NAME = "testSqlSessionFactory"
-        const val MAPPER_LOCATION = "classpath:mbg/com/tch/test/springboot/mapper/one/*.xml"
+        val MAPPER_LOCATION = "classpath:mbg/com/tch/test/springboot/mapper/one/*.xml"
     }
 
     //当有多个数据源的时候,Primary标记的数据源为主数据源,如果不加该标记，在多数据情况下就不知道该选哪个数据源了
@@ -54,7 +54,7 @@ open class TestDatasourceConfig {
         val sessionFactory = SqlSessionFactoryBean()
         sessionFactory.setDataSource(testDataSource())
         sessionFactory.setMapperLocations(PathMatchingResourcePatternResolver()
-                .getResources(TestDatasourceConfig.MAPPER_LOCATION))
+                .getResources(MAPPER_LOCATION))
         return sessionFactory.`object`
     }
 

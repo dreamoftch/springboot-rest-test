@@ -28,6 +28,8 @@ open class StudentServiceImpl: StudentService {
         return studentMapper.selectByExample(StudentExample())
     }
 
+    //这里没有指定事务的transactionManager,会默认使用标记有Primary的transactionManager
+    // 也就是TestDatasourceConfig的transactionManager
     @Transactional
     override fun testTransaction(student: Student) {
         //测试事务是否起作用

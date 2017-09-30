@@ -1,5 +1,6 @@
 package com.tch.test.springboot.service.impl
 
+import com.tch.test.springboot.datasource.Test2DatasourceConfig
 import com.tch.test.springboot.mapper.two.TeacherMapper
 import com.tch.test.springboot.model.two.Teacher
 import com.tch.test.springboot.model.two.TeacherExample
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 open class TeacherServiceImpl: TeacherService {
 
-    private val LOGGER = LoggerFactory.getLogger(StudentServiceImpl::class.java)
+    private val LOGGER = LoggerFactory.getLogger(TeacherServiceImpl::class.java)
 
     @Autowired
     private lateinit var teacherMapper: TeacherMapper
@@ -29,7 +30,7 @@ open class TeacherServiceImpl: TeacherService {
     }
 
 
-    @Transactional
+    @Transactional(transactionManager = Test2DatasourceConfig.TRANSACTION_MANAGER)
     override fun testTransaction(teacher: Teacher) {
         //测试事务是否起作用
         val flag = true
